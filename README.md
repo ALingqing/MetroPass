@@ -1,5 +1,8 @@
 # MetroPass
 
+[![MetroPass CI](https://github.com/ALingqing/MetroPass/actions/workflows/ci.yml/badge.svg)](https://github.com/ALingqing/MetroPass/actions/workflows/ci.yml)
+[![MetroPass Release](https://github.com/ALingqing/MetroPass/actions/workflows/release.yml/badge.svg)](https://github.com/ALingqing/MetroPass/actions/workflows/release.yml)
+
 Metro 月票 / 学生票插件：购买后 **30 天内乘车不花钱**（月票 100、学生票 50，均可配置）。
 
 - 支持 **续费叠加**（未过期时购买会从当前到期时间顺延）；
