@@ -1,7 +1,11 @@
-# MetroPass
+<p align="center">
+  <img src="assets/banner.svg" alt="MetroPass" width="880">
+</p>
 
-[![MetroPass CI](https://github.com/ALingqing/MetroPass/actions/workflows/ci.yml/badge.svg)](https://github.com/ALingqing/MetroPass/actions/workflows/ci.yml)
-[![MetroPass Release](https://github.com/ALingqing/MetroPass/actions/workflows/release.yml/badge.svg)](https://github.com/ALingqing/MetroPass/actions/workflows/release.yml)
+<p align="center">
+  <a href="https://github.com/ALingqing/MetroPass/actions/workflows/ci.yml"><img src="https://github.com/ALingqing/MetroPass/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="https://github.com/ALingqing/MetroPass/actions/workflows/release.yml"><img src="https://github.com/ALingqing/MetroPass/actions/workflows/release.yml/badge.svg" alt="Release"></a>
+</p>
 
 Metro 月票 / 学生票插件：购买后 **30 天内乘车不花钱**（月票 100、学生票 50，均可配置）。
 
