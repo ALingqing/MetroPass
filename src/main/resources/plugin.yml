@@ -1,0 +1,20 @@
+name: MetroPass
+version: '2.0.0'
+main: cn.apcraft.MetroPassPlugin
+api-version: '1.18'
+authors: [Aqing]
+description: Metro 月票/学生票 —— 有效期内乘车不花钱（无需修改 Metro 本体）
+depend: [Metro]
+softdepend: [Vault]
+commands:
+  metropass:
+    description: 购买或查看 Metro 月票
+    usage: /metropass <buy|status|admin>
+    aliases: [mpass]
+permissions:
+  metropass.use:
+    description: 允许购买与查看月票
+    default: true
+  metropass.admin:
+    description: 允许管理玩家的月票
+    default: op

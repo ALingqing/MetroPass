@@ -1,0 +1,26 @@
+# 构建输出
+target/
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.settings/
+.classpath
+.project
+
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 日志 / 崩溃转储
+*.log
+hs_err_pid*.log
+replay_pid*.log
+
+# 注意：libs/ 不忽略！
+# libs/metro-1.1.9.jar 是编译依赖（Metro 未发布到公共仓库），
+# 必须提交进仓库，CI 才能完成构建。

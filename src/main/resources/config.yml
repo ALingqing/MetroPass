@@ -1,0 +1,61 @@
+# ================================================================
+#  MetroPass — Metro 月票 / 学生票
+#  有效期内乘车不花钱（通过"垫付-报销"实现，无需修改 Metro 本体）
+# ================================================================
+
+# 票价（服务器货币）
+prices:
+  monthly: 100.0
+  student: 50.0
+
+# 单张票的有效期（天）。未过期时再次购买会从当前到期时间顺延。
+duration-days: 30
+
+data:
+  # 过期记录保留天数，超过后自动从 passes.yml 清理（0 = 立即清理）
+  expired-retain-days: 30
+  # 数据落盘与清理的间隔（秒）
+  save-interval-seconds: 60
+
+# 免费乘车助手：乘车前后执行"垫付 → 报销 → 回收"，把 Metro 扣掉的车费原额退还
+fare-guard:
+  # 总开关；false 时月票仅记录状态，乘车照常付费
+  enabled: true
+  # 单个观察窗口允许报销的最大金额；超过视为异常，不发放并写入告警
+  max-refund-per-segment: 10000.0
+  # 单次垫付上限（保护性上限）
+  max-reserve: 10000.0
+  # 垫付缓冲：垫付目标 = 该站最低票价估算 + buffer
+  reserve-buffer: 1.0
+  # 会话超时（秒）：右键触发垫付后迟迟未完成乘车的，超时后回收垫付
+  session-timeout-seconds: 15
+  # 报销成功后是否提示玩家（Metro 自身的扣费提示无法拦截）
+  notify-refund: true
+  # 详细日志，排查问题时开启
+  debug: false
+
+# 全部提示文本：支持 & 颜色代码与 {占位符}
+messages:
+  prefix: "&8[&b月票&8] &7"
+  no-permission: "&c你没有权限这样做。"
+  player-only: "&c该命令只能由玩家执行。"
+  usage: "&7使用：&f/metropass buy monthly|student&7，&f/metropass status"
+  admin-usage: "&7/metropass admin give|remove|info|stats|reload"
+  unknown-type: "&c票种必须是 monthly 或 student。"
+  economy-unavailable: "&c服务器经济不可用（未找到 Vault 经济服务）。"
+  buy-insufficient: "&c余额不足：{type} 需要 {price}。"
+  buy-failed: "&c购买失败：扣款未成功，请稍后再试。"
+  buy-success: "&a已购买{type}：花费 {price}，有效期至 {until}。"
+  renew-success: "&a已续费{type}：花费 {price}，新的有效期至 {until}。"
+  status-none: "&e你当前没有有效的月票。"
+  status-line: "&a有效{type}：剩余 {remaining}（至 {until}）。"
+  refund-notify: "&b月票已覆盖本次车费 &f{price}&b，已原路退还。"
+  admin-given: "&a已为 {player} 添加{type}，有效期至 {until}。"
+  admin-removed: "&a已移除 {player} 的{type}。"
+  admin-remove-none: "&e{player} 没有{type}记录。"
+  admin-player-not-found: "&c找不到该玩家（需要其曾进入过服务器）。"
+  admin-info-line: "&7{player}：{list}"
+  admin-info-none: "&7{player}：没有任何月票记录。"
+  admin-stats: "&7累计售票 {sold} 张（票款 {revenue}）；累计报销 {refunded}（{count} 次）。"
+  admin-reload: "&a配置与消息已重新加载。"
+  fare-guard-inactive: "&e提示：免费乘车守卫未启用（详见控制台日志），月票目前不会退返车费。"
