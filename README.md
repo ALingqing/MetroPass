@@ -1,17 +1,24 @@
-<p align="center">
-  <img src="assets/banner.svg" alt="MetroPass" width="880">
-</p>
+<p align="center"><img src="assets/logo.svg" alt="MetroPass" width="132"></p>
+
+<p align="center"><img src="assets/banner.svg" alt="MetroPass" width="860"></p>
 
 <p align="center">
   <a href="https://github.com/ALingqing/MetroPass/actions/workflows/ci.yml"><img src="https://github.com/ALingqing/MetroPass/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
   <a href="https://github.com/ALingqing/MetroPass/actions/workflows/release.yml"><img src="https://github.com/ALingqing/MetroPass/actions/workflows/release.yml/badge.svg" alt="Release"></a>
+  <a href="https://github.com/ALingqing/MetroPass/releases"><img src="https://img.shields.io/github/v/release/ALingqing/MetroPass?color=34E0B4&amp;label=release" alt="Version"></a>
 </p>
 
-Metro 月票 / 学生票插件：购买后 **30 天内乘车不花钱**（月票 100、学生票 50，均可配置）。
+<p align="center">Metro 月票 / 学生票插件，购买后 30 天内乘车不花钱</p>
 
-- 支持 **续费叠加**（未过期时购买会从当前到期时间顺延）；
-- 完整的管理员工具（发放 / 移除 / 查询 / 统计）；
-- 全部提示文本可配置，默认中文。
+## 特性
+
+| 能力 | 说明 |
+| ---- | ---- |
+| 免费乘车 | 持票期间乘车费用由插件全额返还，覆盖月票与学生票 |
+| 不改本体 | 纯附属插件实现，Metro 本体零修改、零补丁 |
+| 续费叠加 | 未过期时再次购买从当前到期时间顺延 |
+| 运营工具 | 发放 / 移除 / 查询 / 统计审计（票款 vs 报销） |
+| 全可配置 | 价格、有效期、消息文本、风控上限均在 config.yml |
 
 ## 工作原理（垫付-报销）
 
