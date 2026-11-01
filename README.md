@@ -123,17 +123,23 @@ mvn package
 
 - **CI**（`.github/workflows/ci.yml`）：push / PR 时自动编译并运行单元测试，
   构建产物 `metro-pass-*.jar` 可在 Actions 页面的 Artifacts 中下载；
-- **Release**（`.github/workflows/release.yml`）：推送 `v*` 标签（如 `v2.0.0`）后
-  自动创建 GitHub Release 并附带插件 jar。
+- **Release**（`.github/workflows/release.yml`）：推送符合 `vX.Y.Z` 格式的标签（如 `v2.0.1`）后，
+  自动编译、运行测试、附上版本说明，并在 [Releases](https://github.com/ALingqing/MetroPass/releases)
+  创建 GitHub Release，附带插件 jar。也可在 Actions 页面手动指定已有标签发布。
 
 本地打标签发布：
 
 ```
-git tag -a v2.0.0 -m "MetroPass v2.0.0"
-git push origin main --tags
+git tag -a v2.0.1 -m "MetroPass v2.0.1"
+git push origin v2.0.1
 ```
 
 ## 变更日志
+
+### 2.0.1
+- 新增可配置的月票、学生票名称，以及剩余时间单位；
+- 默认显示中文，可通过 `config.yml` 修改为其他语言；
+- 新增推送版本标签后自动构建并发布 GitHub Release，附带插件 JAR。
 
 ### 2.0.0
 - 重写"免费乘车"为**不修改 Metro 本体**的垫付-报销机制（原 1.0.0 依赖不存在的 `MetroFareEvent`，无法编译与运行）；

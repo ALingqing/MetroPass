@@ -18,6 +18,21 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag || github.ref }}
+
+      - name: Validate release tag
+        env:
+          RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+        run: |
+          if [[ ! "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+([.-][0-9A-Za-z.-]+)?$ ]]; then
+            echo "Invalid release tag: $RELEASE_TAG (expected vX.Y.Z, optionally with a suffix)"
+            exit 1
+          fi
+          if [[ "$GITHUB_REF_TYPE" == "tag" && "$GITHUB_REF_NAME" != "$RELEASE_TAG" ]]; then
+            echo "The workflow tag and requested release tag do not match."
+            exit 1
+          fi
 
       - name: Setup Java 21
         uses: actions/setup-java@v4
@@ -32,6 +47,13 @@ jobs:
       - name: Create GitHub release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.event.inputs.tag || github.ref_name }}
-          name: ${{ github.event.inputs.tag || github.ref_name }}
+          tag_name: ${{ inputs.tag || github.ref_name }}
+          name: ${{ inputs.tag || github.ref_name }}
+          body: |
+            ## 更新内容
+            - 新增月票和学生票显示名称配置，支持自定义语言。
+            - 新增剩余时间单位配置，支持自定义语言。
+            - 默认显示中文；可在 `config.yml` 的 `ticket-names` 和 `time-units` 中修改。
+            - 完善标签发布流程，自动构建并附带插件 JAR。
+          fail_on_unmatched_files: true
           files: target/metro-pass-*.jar
