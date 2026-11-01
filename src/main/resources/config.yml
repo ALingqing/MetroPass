@@ -8,6 +8,17 @@ prices:
   monthly: 100.0
   student: 50.0
 
+# 玩家可见的票种名称与剩余时间单位（可按服务器语言修改）
+ticket-names:
+  monthly: "月票"
+  student: "学生票"
+
+time-units:
+  day: "天"
+  hour: "小时"
+  minute: "分钟"
+  second: "秒"
+
 # 单张票的有效期（天）。未过期时再次购买会从当前到期时间顺延。
 duration-days: 30
 

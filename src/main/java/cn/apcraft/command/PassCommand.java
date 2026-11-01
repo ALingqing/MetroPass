@@ -174,7 +174,7 @@ public final class PassCommand implements CommandExecutor, TabCompleter {
         long until = passes.give(target.getUniqueId(), type, extraDays);
         messages.sendPrefixed(sender, "admin-given",
                 "player", nameOf(target),
-                "type", type.displayName(),
+                "type", passes.ticketName(type),
                 "until", PassManager.formatUntil(until));
     }
 
@@ -203,11 +203,11 @@ public final class PassCommand implements CommandExecutor, TabCompleter {
             if (passes.remove(target.getUniqueId(), type)) {
                 messages.sendPrefixed(sender, "admin-removed",
                         "player", nameOf(target),
-                        "type", type.displayName());
+                        "type", passes.ticketName(type));
             } else {
                 messages.sendPrefixed(sender, "admin-remove-none",
                         "player", nameOf(target),
-                        "type", type.displayName());
+                        "type", passes.ticketName(type));
             }
         }
     }

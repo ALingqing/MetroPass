@@ -73,6 +73,14 @@ Metro 1.x 没有任何票价拦截点：扣费在"玩家上车成功之后"由 `
 prices:
   monthly: 100.0       # 月票价格
   student: 50.0        # 学生票价格
+ticket-names:
+  monthly: "月票"
+  student: "学生票"
+time-units:
+  day: "天"
+  hour: "小时"
+  minute: "分钟"
+  second: "秒"
 duration-days: 30      # 每张票的有效期（天）
 
 fare-guard:
@@ -84,6 +92,8 @@ fare-guard:
   notify-refund: true              # 报销到账提示
   debug: false                     # 排查日志
 ```
+
+`ticket-names` 设置玩家看到的月票/学生票名称；`time-units` 设置剩余时间的单位，默认使用中文，可按需修改为其他语言。命令参数仍使用 `monthly` 和 `student`，无需修改。
 
 数据保存在 `plugins/MetroPass/passes.yml`（旧版写在 config.yml 里的记录会自动迁移）。
 

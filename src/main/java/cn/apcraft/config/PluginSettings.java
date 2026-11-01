@@ -36,6 +36,22 @@ public final class PluginSettings {
         return type == PassType.STUDENT ? priceStudent() : priceMonthly();
     }
 
+    public String ticketName(PassType type) {
+        String path = "ticket-names." + type.id();
+        return cfg().getString(path, type.displayName());
+    }
+
+    public String timeUnit(String unit) {
+        String defaultValue = switch (unit) {
+            case "day" -> "天";
+            case "hour" -> "小时";
+            case "minute" -> "分钟";
+            case "second" -> "秒";
+            default -> throw new IllegalArgumentException("Unknown time unit: " + unit);
+        };
+        return cfg().getString("time-units." + unit, defaultValue);
+    }
+
     public int durationDays() {
         return Math.max(1, cfg().getInt("duration-days", 30));
     }

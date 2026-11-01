@@ -62,6 +62,10 @@ public final class PassManager {
         return store.getExpiry(playerId, type);
     }
 
+    public String ticketName(PassType type) {
+        return settings.ticketName(type);
+    }
+
     // ---------- 购买 ----------
 
     public void buy(Player player, PassType type) {
@@ -75,7 +79,7 @@ public final class PassManager {
 
         if (!economy.has(player, price)) {
             messages.sendPrefixed(player, "buy-insufficient",
-                    "type", type.displayName(),
+                    "type", settings.ticketName(type),
                     "price", economy.format(price));
             return;
         }
@@ -93,7 +97,7 @@ public final class PassManager {
 
         String key = current > now ? "renew-success" : "buy-success";
         messages.sendPrefixed(player, key,
-                "type", type.displayName(),
+                "type", settings.ticketName(type),
                 "price", economy.format(price),
                 "until", formatUntil(newExpiry));
     }
@@ -108,7 +112,7 @@ public final class PassManager {
             if (expiry > now) {
                 any = true;
                 messages.sendPrefixed(player, "status-line",
-                        "type", type.displayName(),
+                        "type", settings.ticketName(type),
                         "remaining", formatRemaining(expiry - now),
                         "until", formatUntil(expiry));
             }
@@ -158,7 +162,7 @@ public final class PassManager {
         for (PassType type : PassType.values()) {
             long expiry = store.getExpiry(playerId, type);
             if (expiry > now) {
-                parts.add(type.displayName() + "（剩余 " + formatRemaining(expiry - now) + "）");
+                parts.add(settings.ticketName(type) + "（剩余 " + formatRemaining(expiry - now) + "）");
             }
         }
         return parts.isEmpty() ? null : String.join("、", parts);
@@ -202,23 +206,25 @@ public final class PassManager {
 
     // ---------- 时间格式化 ----------
 
-    public static String formatRemaining(long seconds) {
+    public String formatRemaining(long seconds) {
         if (seconds <= 0L) {
-            return "0 秒";
+            return "0 " + settings.timeUnit("second");
         }
         long days = seconds / 86400L;
         long hours = (seconds % 86400L) / 3600L;
         long minutes = (seconds % 3600L) / 60L;
         if (days > 0L) {
-            return days + " 天 " + hours + " 小时";
+            return days + " " + settings.timeUnit("day") + " "
+                    + hours + " " + settings.timeUnit("hour");
         }
         if (hours > 0L) {
-            return hours + " 小时 " + minutes + " 分";
+            return hours + " " + settings.timeUnit("hour") + " "
+                    + minutes + " " + settings.timeUnit("minute");
         }
         if (minutes > 0L) {
-            return minutes + " 分钟";
+            return minutes + " " + settings.timeUnit("minute");
         }
-        return seconds + " 秒";
+        return seconds + " " + settings.timeUnit("second");
     }
 
     public static String formatUntil(long epochSeconds) {
